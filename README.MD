@@ -25,6 +25,4 @@ This folder stores wPLI (weighted Phase Lag Index) extracted connectivity metric
 
 I extensively use Jupyter notebooks for all analyses, normalization, and dataset construction. The notebooks directory contains subdirectories with descriptive names, each including documentation of what has been achieved to facilitate testing and further discussion.
 
-## Getting Started
 
-(Add instructions for setting up the project, installing dependencies, and running the analysis)
