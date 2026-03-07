@@ -35,9 +35,9 @@ else:
     os.environ["PYTHONWARNINGS"] = extra_warnings
 
 
-# ---------------------------------------------------------------------------
+
 # Which session's features to use: "pre", "post", or "both"
-# ---------------------------------------------------------------------------
+
 FEATURE_SESSION = "both"
 # "tier1" (feature-type), "tier2" (feature-type × region/pair)
 GROUPING_TIER = "tier2"

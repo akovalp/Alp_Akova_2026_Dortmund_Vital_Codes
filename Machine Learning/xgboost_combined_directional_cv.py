@@ -46,9 +46,9 @@ DEFAULT_XGBOOST_REPORTS_DIR = (
 )
 
 
-# ===========================================================================
+ 
 # 1. BUILD A LOOKUP TABLE:  exact age value  -->  age-group label
-# ===========================================================================
+ 
 def _build_age_to_group_map(
     y: pd.Series, groups: pd.Series, target_col: str, group_col: str
 ) -> Dict[float, str]:
@@ -156,9 +156,9 @@ def _safe_metric_column_prefix(label: str) -> str:
     return label.strip().lower().replace(" ", "_")
 
 
-# ===========================================================================
+ 
 # 2. CUSTOM XGBOOST OBJECTIVE (the heart of the weighting logic)
-# ===========================================================================
+ 
 def make_combined_objective(
     age_to_group: Dict[float, str],
     alpha_high: float = ALPHA_HIGH,
@@ -253,9 +253,9 @@ def make_combined_objective(
     return objective
 
 
-# ===========================================================================
+
 # 3. HYPERPARAMETER SEARCH SPACE
-# ===========================================================================
+ 
 def _default_param_dist():
     """
     Define the randomised search space for XGBoost hyperparameters.
@@ -280,9 +280,9 @@ def _default_param_dist():
     }
 
 
-# ===========================================================================
-# 3b. SHAP-style additive contribution summaries (from pred_contribs)
-# ===========================================================================
+ 
+# 3. SHAP-style additive contribution summaries (from pred_contribs)
+ 
 def _scope_importance_df(
     scope: str, contrib_matrix: np.ndarray, feature_cols: List[str]
 ) -> pd.DataFrame:
@@ -611,9 +611,9 @@ def _run_single_alpha_config(
     }
 
 
-# ===========================================================================
+ 
 # 4. MAIN CROSS-VALIDATION PIPELINE
-# ===========================================================================
+ 
 def run_xgboost_combined_cv(
     df: pd.DataFrame,
     feature_cols: List[str],
@@ -813,9 +813,9 @@ def run_xgboost_combined_cv(
         print(f"Saved OOF SHAP-style values to: {shap_values_csv}")
         print(f"Saved OOF SHAP-style importance to: {shap_importance_csv}")
 
-    # -----------------------------------------------------------------------
+    
     # 4f. Return best run + alpha-search summary
-    # -----------------------------------------------------------------------
+    
     payload = dict(best_result)
     payload["participant_errors_csv"] = errors_csv
     payload["shap_values_csv"] = shap_values_csv if save_shap else None
@@ -952,9 +952,9 @@ def run_inverse_weight_mode_comparison(
     }
 
 
-# ===========================================================================
+ 
 # 5. COMMAND-LINE INTERFACE
-# ===========================================================================
+ 
 def parse_args():
     """Parse command-line arguments for standalone execution."""
     parser = argparse.ArgumentParser(
