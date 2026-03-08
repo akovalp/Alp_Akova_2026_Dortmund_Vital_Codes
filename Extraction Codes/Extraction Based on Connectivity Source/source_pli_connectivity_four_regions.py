@@ -698,6 +698,6 @@ if __name__ == "__main__":
                     f.write(f"Traceback:\n{err['traceback']}\n\n")
 
             print(
-                f"\n⚠️  {len(all_errors)} error(s) occurred. Log saved to: {error_log_path}")
+                f"\n {len(all_errors)} error(s) occurred. Log saved to: {error_log_path}")
         else:
             print(f"\n✓ No errors occurred during processing.")

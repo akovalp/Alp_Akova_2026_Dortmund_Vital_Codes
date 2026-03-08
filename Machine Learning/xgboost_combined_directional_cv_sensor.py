@@ -645,9 +645,9 @@ def run_xgboost_combined_cv(
     best run only.
     """
 
-    # -----------------------------------------------------------------------
+     
     # 4a. Input validation
-    # -----------------------------------------------------------------------
+     
     if target_col not in df.columns:
         raise ValueError(f"target_col '{target_col}' not found")
     if age_group_col not in df.columns:
@@ -664,9 +664,9 @@ def run_xgboost_combined_cv(
         raise ValueError("shap_check_rtol must be >= 0")
     inverse_weight_mode = _validate_inverse_weight_mode(inverse_weight_mode)
 
-    # -----------------------------------------------------------------------
+     
     # 4b. Prepare feature matrix X, target vector y, and group labels
-    # -----------------------------------------------------------------------
+     
     X = df[feature_cols].copy()
     y = df[target_col].copy()
     groups = df[age_group_col].astype(str).copy()
@@ -689,9 +689,9 @@ def run_xgboost_combined_cv(
             f"Smallest group has {group_counts.min()} samples, below n_splits={n_splits}"
         )
 
-    # -----------------------------------------------------------------------
+     
     # 4c. Build mappings and alpha grids
-    # -----------------------------------------------------------------------
+     
     age_to_group = _build_age_to_group_map(
         y, groups, target_col, age_group_col)
     alpha_high_list = _normalise_alpha_values(
@@ -706,9 +706,9 @@ def run_xgboost_combined_cv(
         for alpha_low in alpha_low_list
     ]
 
-    # -----------------------------------------------------------------------
+     
     # 4d. Print dataset summary before starting
-    # -----------------------------------------------------------------------
+     
     print(
         f"Prepared CV dataset | samples={len(X)} | features={len(feature_cols)} | "
         f"alpha_high_values={alpha_high_list} | alpha_low_values={alpha_low_list} | "
@@ -722,9 +722,9 @@ def run_xgboost_combined_cv(
     best_result = None
     best_key = None
 
-    # -----------------------------------------------------------------------
+     
     # 4e. Evaluate every alpha combination
-    # -----------------------------------------------------------------------
+     
     for combo_idx, (alpha_high, alpha_low) in enumerate(alpha_pairs, start=1):
         print(
             f"\n===== ALPHA COMBINATION {combo_idx}/{len(alpha_pairs)} | "
@@ -812,9 +812,9 @@ def run_xgboost_combined_cv(
         print(f"Saved OOF SHAP-style values to: {shap_values_csv}")
         print(f"Saved OOF SHAP-style importance to: {shap_importance_csv}")
 
-    # -----------------------------------------------------------------------
+     
     # 4f. Return best run + alpha-search summary
-    # -----------------------------------------------------------------------
+     
     payload = dict(best_result)
     payload["participant_errors_csv"] = errors_csv
     payload["shap_values_csv"] = shap_values_csv if save_shap else None

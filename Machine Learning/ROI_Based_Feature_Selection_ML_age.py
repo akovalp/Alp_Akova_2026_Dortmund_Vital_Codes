@@ -2058,7 +2058,7 @@ def run_multi_seed_stability_analysis(
 
     problematic = (global_feature_stability > 0.3) & (seed_stability_std > 0.2)
     if problematic.sum() > 0:
-        print("\n⚠️  Potentially unstable features (selected often but inconsistently):")
+        print("\nPotentially unstable features (selected often but inconsistently):")
         for idx in np.where(problematic)[0][:10]:
             print(
                 f"    {feature_names[idx]}: "
@@ -2543,12 +2543,6 @@ def plot_predictions(y_true, y_pred, title="Actual vs Predicted Age"):
 
     return fig
 
-
-# =============================================================================
-# SECTION 6: ERROR DIAGNOSTICS
-# =============================================================================
-
-
 def analyze_errors_by_age_group(y_true, y_pred, age_groups):
     """Analyze prediction errors stratified by age group."""
     results = pd.DataFrame(
@@ -2951,10 +2945,6 @@ def extract_selected_features(pipeline, feature_names, groups, group_names):
 
     return selected_df, coef
 
-
-# =============================================================================
-# SECTION 6: STATISTICAL VALIDATION
-# =============================================================================
 
 def run_permutation_test(pipeline, X, y, n_permutations=1000, n_jobs=-1):
     """Run permutation test to validate model significance."""
